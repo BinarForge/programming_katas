@@ -131,4 +131,26 @@ namespace JobberUnitTests
 			Assert.That(ex, Is.Not.Null, "The circular dependency has not been detected when expected!");
 		}
 	}
+
+	public class GivenTheJobberInstanceAndTheStructureWithAdvancedDependencies
+	{
+		IJobber _subject;
+
+		[SetUp]
+		public void SetUpTheInvalidStructure()
+		{
+			_subject = new Jobber();
+			_subject.Setup(new Dictionary<char, string> {
+				{ 'B', "CDE" },
+				{ 'C', "F" }
+			});
+		}
+
+		[Test]
+		public void WhenResolvingTheAdvancedDependenciesItConsidersMultipleDependenciesAndReturnsTheCorrectOrder()
+		{
+			var result = _subject.Resolve("ABCDEF");
+			Assert.That(result == "ADFCEB", Is.True, "The resolved order is incorrect.");
+		}
+	}
 }
