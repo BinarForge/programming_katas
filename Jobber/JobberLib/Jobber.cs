@@ -1,15 +1,25 @@
-﻿namespace JobberLib
+﻿using System.Collections.Generic;
+
+namespace JobberLib
 {
+	public class CircularJobDependencyException : System.Exception
+	{
+		public CircularJobDependencyException(string message = "Circular job dependency ocurred!")
+			:base(message)
+		{
+		}
+	}
+
 	public interface IJobber
 	{
-		void Setup();
+		void Setup(Dictionary<char, string> structure);
 		bool IsValid();
-		string Resolve();
+		string Resolve(string jobSequence);
 	}
 
     public class Jobber : IJobber
     {
-		public void Setup()
+		public void Setup(Dictionary<char, string> structure)
 		{
 
 		}
@@ -19,7 +29,7 @@
 			return true;
 		}
 
-		public string Resolve()
+		public string Resolve(string jobSequence)
 		{
 			return string.Empty;
 		}
