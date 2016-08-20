@@ -19,19 +19,34 @@ namespace JobberLib
 
     public class Jobber : IJobber
     {
+		private Dictionary<char, string> _structure;
+
+		// persist the job dependency structure
 		public void Setup(Dictionary<char, string> structure)
 		{
-
+			_structure = structure;
 		}
 
+		// this will be determining whether the dependency structure is circular or not
 		public bool IsValid()
 		{
 			return true;
 		}
 
+		private bool GotDependencies
+		{
+			get { return (_structure != null && _structure.Count > 0); }
+		}
+
 		public string Resolve(string jobSequence)
 		{
-			return string.Empty;
+			if (jobSequence == string.Empty)
+				return string.Empty;
+			else if (jobSequence.Length == 1 || !GotDependencies)
+				return jobSequence;
+			else {
+				return string.Empty;
+			}
 		}
     }
 }
