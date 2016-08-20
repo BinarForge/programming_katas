@@ -5,7 +5,7 @@ namespace JobberLib
 	public class CircularJobDependencyException : System.Exception
 	{
 		public CircularJobDependencyException(string message = "Circular job dependency ocurred!")
-			:base(message)
+			: base(message)
 		{
 		}
 	}
@@ -17,8 +17,8 @@ namespace JobberLib
 		string Resolve(string jobSequence);
 	}
 
-    public class Jobber : IJobber
-    {
+	public class Jobber : IJobber
+	{
 		private Dictionary<char, string> _structure;
 
 		// persist the job dependency structure
@@ -45,8 +45,38 @@ namespace JobberLib
 			else if (jobSequence.Length == 1 || !GotDependencies)
 				return jobSequence;
 			else {
-				return string.Empty;
+				string jobsDone = string.Empty;
+				string workingQueue = jobSequence;
+
+				int counter = 0;
+				while (!string.IsNullOrEmpty(workingQueue)) {
+					for (int idx = 0; idx < workingQueue.Length; idx++) {
+						var curr = workingQueue[idx];
+
+						if (!_structure.ContainsKey(curr)) {
+							jobsDone += curr;
+							workingQueue = workingQueue.Remove(idx, 1);
+						} else {
+							bool readyToGo = true;
+							foreach (var dependency in _structure[curr]) {
+								if (!jobsDone.Contains(dependency.ToString()))
+									readyToGo = false;
+							}
+
+							if (readyToGo) {
+								jobsDone += curr;
+								workingQueue = workingQueue.Remove(idx, 1);
+							}
+						}
+					}
+
+					if (++counter > 25) {
+						throw new CircularJobDependencyException();
+					}
+				}
+
+				return jobsDone;
 			}
 		}
-    }
+	}
 }

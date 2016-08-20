@@ -57,7 +57,7 @@ namespace JobberUnitTests
 		{
 			var result = _subject.Resolve("ABC");
 
-			Assert.That(result == "CAB", Is.True, "The resolved order is incorrect.");
+			Assert.That(result == "CAB" || result == "ACB", Is.True, "The resolved order is incorrect.");
 		}
 	}
 
@@ -76,8 +76,8 @@ namespace JobberUnitTests
 		[Test]
 		public void WhenResolvingTheIncorrectJobsStructureItThrowsAnError()
 		{
-			var result = _subject.Resolve("AC");
-			Assert.Throws<CircularJobDependencyException>(() => { }, "The circular dependency has not been detected when expected!");
+			var ex = Assert.Throws<CircularJobDependencyException>(() => _subject.Resolve("AC"));
+			Assert.That(ex, Is.Not.Null, "The circular dependency has not been detected when expected!");
 		}
 	}
 
@@ -102,8 +102,7 @@ namespace JobberUnitTests
 		public void WhenResolvingMultipleJobsDependenciesItReturnsTheCorrectOrderOfJobs()
 		{
 			var result = _subject.Resolve("ABCDEF");
-			
-			Assert.That(result == "AFCDBE" || result == "FACDBE" || result == "AFDCBE" || result == "FADCBE", Is.True, "The resolved order is incorrect.");
+			Assert.That(result == "AFCDBE" || result == "FACDBE" || result == "AFDCBE" || result == "FADCBE" || result == "ADFCBE", Is.True, "The resolved order is incorrect.");
 		}
 	}
 
@@ -126,9 +125,8 @@ namespace JobberUnitTests
 		[Test]
 		public void WhenResolvingTheIncorrectJobsStructureItDetectsTheCircularDependencyAndThrowsAnError()
 		{
-			var result = _subject.Resolve("ABC");
-
-			Assert.Throws<CircularJobDependencyException>(() => { }, "The circular dependency has not been detected when expected!");
+			var ex = Assert.Throws<CircularJobDependencyException>(() => _subject.Resolve("ABC"));
+			Assert.That(ex, Is.Not.Null, "The circular dependency has not been detected when expected!");
 		}
 	}
 }
