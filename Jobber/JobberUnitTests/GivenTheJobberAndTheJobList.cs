@@ -70,7 +70,9 @@ namespace JobberUnitTests
 		public void SetUpTheValidStructure()
 		{
 			_subject = new Jobber();
-			_subject.Setup(new Dictionary<char, string> { { 'C', "C" } });
+			_subject.Setup(new Dictionary<char, string> {
+				{ 'C', "C" }
+			});
 		}
 
 		[Test]

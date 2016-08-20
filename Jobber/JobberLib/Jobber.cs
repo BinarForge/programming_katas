@@ -48,14 +48,16 @@ namespace JobberLib
 				string jobsDone = string.Empty;
 				string workingQueue = jobSequence;
 
-				int counter = 0;
 				while (!string.IsNullOrEmpty(workingQueue)) {
+					bool removedSomething = false;
+					
 					for (int idx = 0; idx < workingQueue.Length; idx++) {
 						var curr = workingQueue[idx];
 
 						if (!_structure.ContainsKey(curr)) {
 							jobsDone += curr;
 							workingQueue = workingQueue.Remove(idx, 1);
+							removedSomething = true;
 						} else {
 							bool readyToGo = true;
 							foreach (var dependency in _structure[curr]) {
@@ -66,11 +68,13 @@ namespace JobberLib
 							if (readyToGo) {
 								jobsDone += curr;
 								workingQueue = workingQueue.Remove(idx, 1);
+								removedSomething = true;
 							}
 						}
 					}
 
-					if (++counter > 25) {
+					if (!removedSomething) {
+						// this will break the infinite loop when needed
 						throw new CircularJobDependencyException();
 					}
 				}
