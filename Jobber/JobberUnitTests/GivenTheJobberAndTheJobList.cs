@@ -2,6 +2,13 @@
 using JobberLib;
 using System.Collections.Generic;
 
+/**
+	None comments have been put around the test cases as the namespace/class/method name
+	should describe the tested scenarios enough.
+
+	The cases given should make sure that the Jobber algorithm solves all the scenarios described
+	in the exercise given.
+*/
 namespace JobberUnitTests
 {
 	[TestFixture]
