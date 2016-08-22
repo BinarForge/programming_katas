@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JobberLib", "JobberLib\JobberLib.csproj", "{3B58AAE5-9C6B-48DB-87AB-7DE1CF5BAE4D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JobberUnitTests", "JobberUnitTests\JobberUnitTests.csproj", "{1B889D59-269D-4F78-AC9C-E93E799C90C2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JobberDemoWebApp", "JobberDemoWebApp\JobberDemoWebApp.csproj", "{B0B1DEE4-C42B-4847-B683-CA8C0B629A7A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{1B889D59-269D-4F78-AC9C-E93E799C90C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1B889D59-269D-4F78-AC9C-E93E799C90C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1B889D59-269D-4F78-AC9C-E93E799C90C2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B0B1DEE4-C42B-4847-B683-CA8C0B629A7A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0B1DEE4-C42B-4847-B683-CA8C0B629A7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B0B1DEE4-C42B-4847-B683-CA8C0B629A7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B0B1DEE4-C42B-4847-B683-CA8C0B629A7A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
