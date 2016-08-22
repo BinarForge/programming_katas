@@ -144,7 +144,7 @@ namespace JobberUnitTests
 		IJobber _subject;
 
 		[SetUp]
-		public void SetUpTheInvalidStructure()
+		public void SetUpTheAdvancedStructure()
 		{
 			_subject = new Jobber();
 			_subject.Setup(new Dictionary<char, string> {
