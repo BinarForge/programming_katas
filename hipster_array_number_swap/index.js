@@ -1,4 +1,4 @@
-const assert = require('./assert')
+const assert = require('../common/js/assert')
 const hipster = require('./hipster-array-swap')
 
 
